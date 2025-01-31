@@ -1,24 +1,56 @@
 import GridCountrys from "./assets/components/GridCountrys";
 import Header from "./assets/components/Header";
 
-import { Search } from "lucide-react";
+import { Search, ArrowLeft } from "lucide-react";
+
+import { useRequests } from "./services/useRequests";
+import { useState } from "react";
+import useCountryStore from "./stores/useCountryStore";
 
 const App = () => {
+  const { getCountryByName } = useRequests();
+  const [searchResults, setSearchResults] = useState([]);
+  const { country, setCountry } = useCountryStore();
+  const [visible, setVisible] = useState("block");
+
+  const handleSearch = async () => {
+    if (country.trim()) {
+      const data = await getCountryByName(country);
+      setSearchResults(data);
+      // console.log(data);
+      setVisible("hidden");
+    }
+  };
+
+  const handleBack = () => {
+    setVisible("block");
+    setCountry("");
+    setSearchResults([]);
+  };
+
   return (
     <>
       <div className="shadow">
         <Header />
       </div>
 
-      <section className="my-8 text-sm">
+      <section className={`my-8 text-sm ${visible}`}>
         <div className="custom-container">
           <div className="flex flex-wrap gap-10 md:items-center md:justify-between">
             <div className="flex items-center gap-2 rounded px-4 shadow">
-              <Search className="size-4" />
+              <button
+                type="button"
+                className="cursor-pointer text-gray-400"
+                onClick={handleSearch}
+              >
+                <Search className="size-4" />
+              </button>
               <input
                 placeholder="Search for a country"
                 type="text"
                 className="w-75 rounded p-2 outline-0"
+                onChange={(e) => setCountry(e.target.value)}
+                value={country}
               />
             </div>
 
@@ -34,7 +66,92 @@ const App = () => {
         </div>
       </section>
 
-      <GridCountrys />
+      {searchResults.length > 0 && (
+        <div className="custom-container text-sm">
+          <button
+            className="my-10 flex cursor-pointer items-center gap-2 px-6 py-2 shadow"
+            onClick={handleBack}
+          >
+            <ArrowLeft className="size-4" />
+            Back
+          </button>
+          <div>
+            {searchResults.map((country: any) => (
+              <div
+                key={country.name.common}
+                className="flex w-full flex-wrap items-center justify-center gap-10 md:flex-nowrap"
+              >
+                <div>
+                  <img
+                    src={country.flags.png}
+                    alt={country.name.common}
+                    width={500}
+                  />
+                </div>
+
+                <div>
+                  <h2 className="font-base font-bold">{country.name.common}</h2>
+                  <div className="flex gap-10">
+                    <div className="mt-4 flex flex-col gap-1">
+                      <span>
+                        <strong>Native Name: </strong>
+                        {country.name.official}
+                      </span>
+                      <span>
+                        <strong>Population: </strong>
+                        {country.population.toLocaleString("en-US")}
+                      </span>
+                      <span>
+                        <strong>Region: </strong>
+                        {country.region}
+                      </span>
+                      <span>
+                        <strong>Sub Region: </strong>
+                        {country.subregion}
+                      </span>
+                      <span>
+                        <strong>Capital: </strong>
+                        {country.capital}
+                      </span>
+                    </div>
+                    <div className="mt-4 flex flex-col gap-1">
+                      <span>
+                        <strong>Top Level Domain:</strong> {country.tld}
+                      </span>
+                      <span>
+                        <strong>Currencies: </strong>
+                        {Object.values(country.currencies)
+                          .map((currency: any) => currency.name)
+                          .join(", ")}
+                      </span>
+                      <span>
+                        <strong>Languages: </strong>
+                        {Object.values(country.languages)
+                          .map((language: any) => language)
+                          .join(", ")}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="mt-12">
+                    <span className="flex flex-wrap items-center gap-2">
+                      <strong>Border Countries:</strong>
+                      {country.borders.map((border: any) => (
+                        <span key={border} className="rounded px-4 py-1 shadow">
+                          {border}
+                        </span>
+                      ))}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <section className={`${visible}`}>
+        <GridCountrys />
+      </section>
     </>
   );
 };

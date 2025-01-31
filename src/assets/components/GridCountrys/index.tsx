@@ -12,7 +12,7 @@ const GridCountrys = () => {
       setCountries(data);
     };
     fetchCountries();
-  }, []); // Atualiza a cada 10 segundos
+  }, []);
 
   return (
     <section className="custom-container">
