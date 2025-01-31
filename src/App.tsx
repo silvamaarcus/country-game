@@ -1,3 +1,4 @@
+import GridCountrys from "./assets/components/GridCountrys";
 import Header from "./assets/components/Header";
 
 import { Search } from "lucide-react";
@@ -32,6 +33,8 @@ const App = () => {
           </div>
         </div>
       </section>
+
+      <GridCountrys />
     </>
   );
 };
