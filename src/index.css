@@ -2,22 +2,23 @@
 
 :root {
   @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
-
-  font-family: "Nunito Sans", serif;
-  line-height: 1.5;
-  font-weight: 400;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  // Colors
-  --dark-blue: #121a25;
-  --very-dark-blue-bg: #10181e;
-  --very-dark-blue-text: #121414;
-  --dark-gray-input: #858585;
-  --very-light-gray-bg: #fafafa;
-  --white: #ffffff;
 }
 
+@theme {
+  /* Colors */
+  --color-dark-blue: #121a25;
+  --color-very-dark-blue-bg: #10181e;
+  --color-very-dark-blue-text: #121414;
+  --color-dark-gray-input: #858585;
+  --color-very-light-gray-bg: #fafafa;
+  /* Fonts */
+  --font-serif: "Nunito Sans", serif;
+}
+
+.custom-container {
+  @apply container mx-auto my-0 p-4;
+}
