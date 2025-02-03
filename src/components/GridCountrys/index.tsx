@@ -1,10 +1,19 @@
+// Hooks
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+// Services
 import { useRequests } from "../../services/useRequests";
+// Components
 import CardCountry from "./components/CardCountry";
 
 const GridCountrys = () => {
   const { getRandomCountries } = useRequests();
   const [countries, setCountries] = useState([]);
+  const navigate = useNavigate();
+
+  const handleCardClick = (country: any) => {
+    navigate("/country", { state: { countryData: [country] } });
+  };
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -18,7 +27,11 @@ const GridCountrys = () => {
     <section className="custom-container">
       <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
         {countries.map((country: any) => (
-          <div key={country.name.common} className="col-span-1 md:col-span-3">
+          <div
+            key={country.name.common}
+            className="col-span-1 md:col-span-3"
+            onClick={() => handleCardClick(country)}
+          >
             <CardCountry
               name={country.name.common}
               flag={country.flags.png}

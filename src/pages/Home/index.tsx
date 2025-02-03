@@ -4,22 +4,18 @@ import { Search } from "lucide-react";
 import useCountryStore from "../../stores/useCountryStore";
 import { useRequests } from "../../services/useRequests";
 // Hooks
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GridCountrys from "../../components/GridCountrys";
 
 const Home = () => {
   const { getCountryByName } = useRequests();
   const { country, setCountry } = useCountryStore();
-  const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
 
   const handleSearch = async () => {
     if (country.trim()) {
       const data = await getCountryByName(country);
-      setSearchResults(data);
       navigate("/country", { state: { countryData: data } });
-      // console.log(data);
     }
   };
 
@@ -61,5 +57,4 @@ const Home = () => {
     </section>
   );
 };
-
 export default Home;
