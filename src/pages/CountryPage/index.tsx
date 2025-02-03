@@ -1,28 +1,32 @@
 import { ArrowLeft } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import useThemeStore from "../../stores/useThemeStore";
+
 const CountryPage = () => {
   const location = useLocation();
   const countryData = location.state?.countryData;
   const navigate = useNavigate();
+
+  const { theme } = useThemeStore();
 
   const handleBack = () => {
     navigate("/");
   };
 
   return (
-    <>
+    <section className="h-screen">
       {countryData && (
         <div>
           <div className="custom-container text-sm">
             <button
-              className="my-10 flex cursor-pointer items-center gap-2 px-6 py-2 shadow"
+              className={`my-10 flex cursor-pointer items-center gap-2 rounded px-6 py-2 shadow ${theme === "dark" ? "bg-dark-blue" : "bg-white"}`}
               onClick={handleBack}
             >
               <ArrowLeft className="size-4" />
               Back
             </button>
-            <div>
+            <div className="py-10">
               {countryData.map((country: any) => (
                 <div
                   key={country.name.common}
@@ -87,7 +91,7 @@ const CountryPage = () => {
                         {country.borders.map((border: any) => (
                           <span
                             key={border}
-                            className="rounded px-4 py-1 shadow"
+                            className={`rounded px-4 py-1 shadow ${theme === "dark" ? "bg-dark-blue" : "bg-white"}`}
                           >
                             {border}
                           </span>
@@ -101,7 +105,7 @@ const CountryPage = () => {
           </div>
         </div>
       )}
-    </>
+    </section>
   );
 };
 
