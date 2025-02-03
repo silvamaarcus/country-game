@@ -27,7 +27,7 @@ This project was my first time using **Zustand** for global state management, wh
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/rest-countries.git
+   git clone https://github.com/silvamaarcus/country-game.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -47,9 +47,8 @@ The project will be available at `http://localhost:5173/`.
 ## 🚀 Deployment
 
 The project is available online via Vercel:
-[🔗 Access here](https://your-project.vercel.app)
+[🔗 Access here](https://country-game-ten.vercel.app/)
 
 ## 📄 License
 
 This project is open-source and is licensed under the MIT license.
-
