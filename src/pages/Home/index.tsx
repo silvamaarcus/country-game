@@ -21,6 +21,12 @@ const Home = () => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <section className="my-8">
       <main className="custom-container">
@@ -40,6 +46,7 @@ const Home = () => {
               type="text"
               className={`w-75 rounded p-2 outline-0 ${theme === "dark" ? "bg-dark-blue" : "bg-white"}`}
               onChange={(e) => setCountry(e.target.value)}
+              onKeyDown={handleKeyDown}
               value={country}
             />
           </div>
