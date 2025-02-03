@@ -4,13 +4,17 @@ import Home from "./pages/Home";
 import CountryPage from "./pages/CountryPage";
 // Components
 import Header from "./components/Header";
+// Stores
+import useThemeStore from "./stores/useThemeStore";
 
 const App = () => {
+  const { theme } = useThemeStore();
+
   return (
-    <>
-      <section className="shadow">
+    <section className={`bg-${theme}`}>
+      <main className="shadow">
         <Header />
-      </section>
+      </main>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -18,7 +22,7 @@ const App = () => {
           <Route path="*" element={<h1 className="text-5xl">Not Found</h1>} />
         </Routes>
       </BrowserRouter>
-    </>
+    </section>
   );
 };
 export default App;

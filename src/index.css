@@ -6,17 +6,28 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  height: 100%;
 }
 
 @theme {
   /* Colors */
-  --color-dark-blue: #121a25;
-  --color-very-dark-blue-bg: #10181e;
+  --color-dark-blue: #2b3743;
+  --color-very-dark-blue-bg: #202d36;
   --color-very-dark-blue-text: #121414;
   --color-dark-gray-input: #858585;
   --color-very-light-gray-bg: #fafafa;
   /* Fonts */
   --font-serif: "Nunito Sans", serif;
+}
+
+.bg-light {
+  background-color: var(--color-very-light-gray-bg);
+  color: var(--color-very-dark-blue-text);
+}
+.bg-dark {
+  background-color: var(--color-very-dark-blue-bg);
+  color: var(--color-very-light-gray-bg);
 }
 
 .custom-container {

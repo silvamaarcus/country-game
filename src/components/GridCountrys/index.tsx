@@ -5,11 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { useRequests } from "../../services/useRequests";
 // Components
 import CardCountry from "./components/CardCountry";
+// Stores
+import useThemeStore from "../../stores/useThemeStore";
 
 const GridCountrys = () => {
   const { getRandomCountries } = useRequests();
   const [countries, setCountries] = useState([]);
   const navigate = useNavigate();
+
+  const { theme } = useThemeStore();
 
   const handleCardClick = (country: any) => {
     navigate("/country", { state: { countryData: [country] } });
@@ -29,7 +33,7 @@ const GridCountrys = () => {
         {countries.map((country: any) => (
           <div
             key={country.name.common}
-            className="col-span-1 md:col-span-3"
+            className={`rounded col-span-1 md:col-span-3 ${theme === "dark" ? "bg-dark-blue" : "bg-white"}`}
             onClick={() => handleCardClick(country)}
           >
             <CardCountry

@@ -1,6 +1,7 @@
 // Icons
 import { Search } from "lucide-react";
-// Services
+// Services e Stores
+import useThemeStore from "../../stores/useThemeStore";
 import useCountryStore from "../../stores/useCountryStore";
 import { useRequests } from "../../services/useRequests";
 // Hooks
@@ -11,6 +12,7 @@ const Home = () => {
   const { getCountryByName } = useRequests();
   const { country, setCountry } = useCountryStore();
   const navigate = useNavigate();
+  const { theme } = useThemeStore();
 
   const handleSearch = async () => {
     if (country.trim()) {
@@ -23,7 +25,9 @@ const Home = () => {
     <section className="my-8">
       <main className="custom-container">
         <div className="flex flex-wrap gap-10 md:items-center md:justify-between">
-          <div className="flex items-center gap-2 rounded px-4 shadow">
+          <div
+            className={`flex items-center gap-2 rounded px-4 shadow ${theme === "dark" ? "bg-dark-blue" : "bg-white"}`}
+          >
             <button
               type="button"
               className="cursor-pointer text-gray-400"
@@ -34,13 +38,15 @@ const Home = () => {
             <input
               placeholder="Search for a country"
               type="text"
-              className="w-75 rounded p-2 outline-0"
+              className={`w-75 rounded p-2 outline-0 ${theme === "dark" ? "bg-dark-blue" : "bg-white"}`}
               onChange={(e) => setCountry(e.target.value)}
               value={country}
             />
           </div>
 
-          <select className="w-50 rounded px-1 py-2 shadow md:w-auto md:px-2">
+          <select
+            className={`w-50 rounded px-1 py-2 shadow md:w-auto md:px-2 ${theme === "dark" ? "bg-dark-blue" : "bg-white"}`}
+          >
             <option value="default">Filter by Region</option>
             <option value="africa">Africa</option>
             <option value="america">America</option>
