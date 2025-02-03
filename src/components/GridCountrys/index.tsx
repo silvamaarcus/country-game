@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRequests } from "../../../services/useRequests";
+import { useRequests } from "../../services/useRequests";
 import CardCountry from "./components/CardCountry";
 
 const GridCountrys = () => {

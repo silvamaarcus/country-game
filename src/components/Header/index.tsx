@@ -1,6 +1,6 @@
 import { Sun } from "lucide-react";
 import { Moon } from "lucide-react";
-import useThemeStore from "../../../stores/useThemeStore";
+import useThemeStore from "../../stores/useThemeStore";
 
 const Header = () => {
   const { theme, setTheme } = useThemeStore();

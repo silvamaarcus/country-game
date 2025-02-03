@@ -1,40 +1,44 @@
-import GridCountrys from "./assets/components/GridCountrys";
-import Header from "./assets/components/Header";
+// import GridCountrys from "./components/GridCountrys";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import CountryPage from "./pages/CountryPage";
+import Header from "./components/Header";
 
-import { Search, ArrowLeft } from "lucide-react";
+// import { Search, ArrowLeft } from "lucide-react";
 
-import { useRequests } from "./services/useRequests";
-import { useState } from "react";
-import useCountryStore from "./stores/useCountryStore";
+// import { useRequests } from "./services/useRequests";
+// import { useState } from "react";
+// import useCountryStore from "./stores/useCountryStore";
 
 const App = () => {
-  const { getCountryByName } = useRequests();
-  const [searchResults, setSearchResults] = useState([]);
-  const { country, setCountry } = useCountryStore();
-  const [visible, setVisible] = useState("block");
+  // const { getCountryByName } = useRequests();
+  // const [searchResults, setSearchResults] = useState([]);
+  // const { country, setCountry } = useCountryStore();
+  // const [visible, setVisible] = useState("block");
 
-  const handleSearch = async () => {
-    if (country.trim()) {
-      const data = await getCountryByName(country);
-      setSearchResults(data);
-      // console.log(data);
-      setVisible("hidden");
-    }
-  };
-
-  const handleBack = () => {
-    setVisible("block");
-    setCountry("");
-    setSearchResults([]);
-  };
+  // const handleSearch = async () => {
+  //   if (country.trim()) {
+  //     const data = await getCountryByName(country);
+  //     setSearchResults(data);
+  //     // console.log(data);
+  //     setVisible("hidden");
+  //   }
+  // };
 
   return (
     <>
-      <div className="shadow">
+      <section className="shadow">
         <Header />
-      </div>
+      </section>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/country" element={<CountryPage />} />
+          <Route path="*" element={<h1>Not Found</h1>} />
+        </Routes>
+      </BrowserRouter>
 
-      <section className={`my-8 text-sm ${visible}`}>
+      {/* <section className={`my-8 text-sm ${visible} bg-black`}>
         <div className="custom-container">
           <div className="flex flex-wrap gap-10 md:items-center md:justify-between">
             <div className="flex items-center gap-2 rounded px-4 shadow">
@@ -64,9 +68,9 @@ const App = () => {
             </select>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {searchResults.length > 0 && (
+      {/* {searchResults.length > 0 && (
         <div className="custom-container text-sm">
           <button
             className="my-10 flex cursor-pointer items-center gap-2 px-6 py-2 shadow"
@@ -147,11 +151,11 @@ const App = () => {
             ))}
           </div>
         </div>
-      )}
+      )} */}
 
-      <section className={`${visible}`}>
+      {/* <section className={`${visible}`}>
         <GridCountrys />
-      </section>
+      </section> */}
     </>
   );
 };
