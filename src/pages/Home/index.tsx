@@ -28,7 +28,7 @@ const Home = () => {
   };
 
   return (
-    <section className="my-8 h-screen">
+    <section className="my-8 h-full">
       <main className="custom-container">
         <div className="flex flex-wrap gap-10 md:items-center md:justify-between">
           <div
